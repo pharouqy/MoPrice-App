@@ -1,4 +1,5 @@
 import Nav from "./nav";
+import "../styles/header.css"
 
 const Header = () => {
 

@@ -1,0 +1,23 @@
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav > ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+}
+
+.logo > p {
+    font-size: 2.5rem;
+    padding: 30px;
+}

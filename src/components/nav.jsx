@@ -4,7 +4,7 @@ const Nav = () => {
   return (
     <div className="menu">
       <div className="logo">
-        <img src="./src/assets/moprice.webp" alt="logo" />
+        <p>MoPrice</p>
       </div>
       <nav>
         <ul>
