@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import AuthCheck from "../components/authCheck";
 import Home from "../pages/home";
 import Login from "../pages/login";
 import Register from "../pages/register";
@@ -9,11 +10,18 @@ const AppRouter = () => {
   return (
     <>
       <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/login" Component={Login} />
-        <Route path="/register" Component={Register} />
-        <Route path="/contact" Component={Contact} />
-        <Route path="*" Component={Errors} />
+        <Route
+          path="/home"
+          element={
+            <AuthCheck>
+              <Home />
+            </AuthCheck>
+          }
+        />
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Errors />} />
       </Routes>
     </>
   );

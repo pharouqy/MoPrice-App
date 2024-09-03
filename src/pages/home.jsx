@@ -44,7 +44,7 @@ const Home = () => {
       </form>
       <aside>
         <h2>
-          The Final Price For The Resell is : <span>{finalPrice}</span> Da
+          The Final Price For The Resell in {currentYear} is : <span>{finalPrice}</span> Da
         </h2>
       </aside>
     </div>

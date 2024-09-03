@@ -16,6 +16,17 @@
 }
 
 .contact,
-.home {
+.home,
+.login,
+.register {
     flex-direction: column;
+}
+
+p.instruction {
+  font-size: 0.6rem;
+}
+
+p.error {
+  color: red;
+  font-size: 0.7rem;
 }
