@@ -10,6 +10,7 @@ const Profil = () => {
   const token = localStorage.getItem("token");
   const [completeName, setCompleteName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [editingField, setEditingField] = useState(null);
   const [initialName, setInitialName] = useState("");
   const [initialEmail, setInitialEmail] = useState("");
@@ -73,6 +74,29 @@ const Profil = () => {
       });
   };
 
+  const handlePasswordChange = () => {
+    if (password === "") return;
+
+    axios
+      .put(
+        `${apiUrl}/user/${id}`,
+        { password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        setPassword(""); // Réinitialise le champ du mot de passe après la mise à jour
+        alert("Mot de passe mis à jour avec succès");
+      })
+      .catch((error) => {
+        alert(`Erreur lors de la mise à jour du mot de passe : ${error.message}`);
+      });
+  };
+
   const handleDelete = () => {
     axios
       .delete(`${apiUrl}/user/${id}`, {
@@ -91,7 +115,7 @@ const Profil = () => {
   };
 
   return (
-    <>
+    <div className="profil">
       <h1>Profil</h1>
       <div>
         <ul>
@@ -131,12 +155,21 @@ const Profil = () => {
               <span onClick={() => handleFieldClick("email")}>{email}</span>
             )}
           </li>
+          <li>
+            Password:
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={handlePasswordChange}>Changer mot de passe</button>
+          </li>
         </ul>
       </div>
       <div>
         <button onClick={handleDelete}>Supprimer</button>
       </div>
-    </>
+    </div>
   );
 };
 

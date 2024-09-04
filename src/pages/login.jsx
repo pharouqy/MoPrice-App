@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
@@ -96,6 +96,9 @@ const Login = () => {
           <button type="submit">Login</button>
         </div>
       </form>
+      <div>
+        <Link to="/forgot-password">Mot de passe oublié ?</Link>
+      </div>
     </div>
   );
 };

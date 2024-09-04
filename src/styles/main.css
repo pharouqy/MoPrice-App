@@ -8,7 +8,9 @@
 .login,
 .register,
 .home,
-.errors {
+.errors,
+.profil,
+.forgot-password {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,8 +20,10 @@
 .contact,
 .home,
 .login,
-.register {
-    flex-direction: column;
+.register,
+.profil,
+.forgot-password {
+  flex-direction: column;
 }
 
 p.instruction {
