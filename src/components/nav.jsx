@@ -1,32 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import useLogout from "../hooks/useLogout";
 
 const Nav = () => {
   const token = localStorage.getItem("token");
-  const apiUrl = import.meta.env.VITE_API_URL;
-  const navigate = useNavigate();
-  const logout = () => {
-    localStorage.removeItem("token");
-    axios
-      .get(
-        `${apiUrl}/logout`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        alert(`Erreur lors de la déconnexion : ${error.message}`);
-      });
-  };
+  const id = localStorage.getItem("id");
+  const logout = useLogout();
+
   return (
     <div className="menu">
       <div className="logo">
@@ -40,7 +19,10 @@ const Nav = () => {
                 <Link to="/home">Home</Link>
               </li>
               <li>
-                <button onClick={logout}>Logout</button>
+                <Link to={`/profil/${id}`}>Profil</Link>
+              </li>
+              <li>
+                <button onClick={() => logout()}>Logout</button>
               </li>
             </>
           ) : (

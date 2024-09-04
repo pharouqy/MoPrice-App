@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
@@ -51,8 +51,9 @@ const Login = () => {
         )
         .then((response) => {
           alert("Connexion réussie !");
-          const token = response.data.token;
+          const { userId, token } = response.data;
           localStorage.setItem("token", token);
+          localStorage.setItem("id", userId);
           navigate("/home");
         })
         .catch((error) => {

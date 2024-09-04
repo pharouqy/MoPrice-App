@@ -80,7 +80,9 @@ const Register = () => {
             )
             .then((response) => {
               const token = response.data.token;
+              const userId = response.data.userId;
               localStorage.setItem("token", token);
+              localStorage.setItem("id", userId);
               navigate("/home");
             })
             .catch((error) => {
