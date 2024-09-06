@@ -1,4 +1,3 @@
-// hooks/useLogout.js
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -34,7 +33,7 @@ const useLogout = () => {
         navigate("/");
       })
       .catch((error) => {
-        alert(`Erreur lors de la déconnexion : ${error.message}`);
+        console.log(`Erreur lors de la déconnexion : ${error.message}`);
       });
   };
 

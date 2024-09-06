@@ -10,6 +10,7 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false); // État pour la case à cocher
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const [status, setStatus] = useState("");
 
   // Récupérer les informations des cookies lors du chargement du composant
   useEffect(() => {
@@ -64,7 +65,7 @@ const Login = () => {
           }
         )
         .then((response) => {
-          alert("Connexion réussie !");
+          setStatus("Connexion réussie !");
           const { userId, token } = response.data;
 
           // Si "Se souvenir de moi" est coché, sauvegarder les informations dans les cookies
@@ -82,7 +83,7 @@ const Login = () => {
           navigate("/home");
         })
         .catch((error) => {
-          alert(`Erreur lors de l'inscription : ${error.message}`);
+          setStatus(`Erreur lors de l'inscription : ${error.message}`);
         });
     }
   };
@@ -134,6 +135,7 @@ const Login = () => {
       <div>
         <Link to="/forgot-password">Mot de passe oublié ?</Link>
       </div>
+      <p>{status}</p>
     </div>
   );
 };

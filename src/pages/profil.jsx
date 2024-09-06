@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import useLogout from "../hooks/useLogout";
+import Cookies from "js-cookie";
 
 const Profil = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -14,6 +15,7 @@ const Profil = () => {
   const [editingField, setEditingField] = useState(null);
   const [initialName, setInitialName] = useState("");
   const [initialEmail, setInitialEmail] = useState("");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     // Fetch user data
@@ -31,7 +33,7 @@ const Profil = () => {
         setInitialEmail(response.data.email);
       })
       .catch((error) => {
-        alert(`Erreur lors de la recherche : ${error.message}`);
+        setStatus(`Erreur lors de la recherche : ${error.message}`);
       });
   }, [apiUrl, id, token]);
 
@@ -60,7 +62,7 @@ const Profil = () => {
       })
       .then(() => {
         setEditingField(null); // Quitte le mode édition après la sauvegarde
-        alert(`${field} mis à jour avec succès`);
+        setStatus(`${field} mis à jour avec succès`);
 
         // Met à jour les valeurs initiales après la sauvegarde
         if (field === "name") {
@@ -70,7 +72,7 @@ const Profil = () => {
         }
       })
       .catch((error) => {
-        alert(`Erreur lors de la mise à jour : ${error.message}`);
+        setStatus(`Erreur lors de la mise à jour : ${error.message}`);
       });
   };
 
@@ -90,10 +92,12 @@ const Profil = () => {
       )
       .then(() => {
         setPassword(""); // Réinitialise le champ du mot de passe après la mise à jour
-        alert("Mot de passe mis à jour avec succès");
+        setStatus("Mot de passe mis à jour avec succès");
       })
       .catch((error) => {
-        alert(`Erreur lors de la mise à jour du mot de passe : ${error.message}`);
+        setStatus(
+          `Erreur lors de la mise à jour du mot de passe : ${error.message}`
+        );
       });
   };
 
@@ -106,11 +110,14 @@ const Profil = () => {
         },
       })
       .then(() => {
-        alert("Profil supprimé avec succès");
+        Cookies.remove("email");
+        Cookies.remove("password");
+
+        setStatus("Profil supprimé avec succès");
         logout();
       })
       .catch((error) => {
-        alert(`Erreur lors de la suppression : ${error.message}`);
+        setStatus(`Erreur lors de la suppression : ${error.message}`);
       });
   };
 
@@ -169,6 +176,7 @@ const Profil = () => {
       <div>
         <button onClick={handleDelete}>Supprimer</button>
       </div>
+      <p>{status}</p>
     </div>
   );
 };

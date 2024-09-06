@@ -10,6 +10,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const [status, setStatus] = useState("");
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -64,8 +65,9 @@ const Register = () => {
           }
         )
         .then(() => {
-          alert("Inscription réussie !");
-          axios
+          setStatus("Inscription réussie !");
+          setTimeout(() => {
+            axios
             .post(
               `${apiUrl}/login`,
               {
@@ -86,11 +88,12 @@ const Register = () => {
               navigate("/home");
             })
             .catch((error) => {
-              alert(`Erreur lors de la connexion : ${error.message}`);
+              setStatus(`Erreur lors de la connexion : ${error.message}`);
             });
+          }, 1000);
         })
         .catch((error) => {
-          alert(`Erreur lors de l'inscription : ${error.message}`);
+          setStatus(`Erreur lors de l'inscription : ${error.message}`);
         });
     }
   };
@@ -153,6 +156,7 @@ const Register = () => {
           <button type="submit">Register</button>
         </div>
       </form>
+      <p>{status}</p>
     </div>
   );
 };

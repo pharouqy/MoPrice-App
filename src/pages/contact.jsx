@@ -19,18 +19,51 @@ const Contact = () => {
     });
   };
 
+  const validateEmail = (email) => {
+    // Basic email regex pattern
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateName = (name) => {
+    // Name should only contain letters and be at least 2 characters long
+    const nameRegex = /^[A-Za-z]{2,}$/;
+    return nameRegex.test(name);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus("");
+
+    // Check if fields are empty
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus("All fields must be filled.");
+      return;
+    }
+
+    // Validate the name
+    if (!validateName(formData.name)) {
+      setStatus("Name must contain only letters and be at least 2 characters long.");
+      return;
+    }
+
+    // Validate the email
+    if (!validateEmail(formData.email)) {
+      setStatus("Please enter a valid email address.");
+      return;
+    }
+
     setStatus("Sending...");
     try {
       const response = await axios.post(`${apiUrl}/contact`, formData);
       if (response.status === 200) {
         setStatus("Message sent successfully!");
+        setFormData({ name: "", email: "", message: "" }); // Reset the form
       } else {
         setStatus("Failed to send message.");
       }
     } catch (error) {
-      setStatus(`Error occurred while sending the message : ${error.message}`);
+      setStatus(`Error occurred while sending the message: ${error.message}`);
     }
   };
 
