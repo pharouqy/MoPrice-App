@@ -103,7 +103,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+          {errors.email && <p className="error">{errors.email}</p>}
         </div>
         <div>
           <label htmlFor="password">Password</label>
@@ -116,7 +116,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+          {errors.password && <p className="error">{errors.password}</p>}
         </div>
         <div>
           <label>

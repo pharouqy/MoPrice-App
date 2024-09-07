@@ -7,20 +7,35 @@ const ResetPassword = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!password || !confirmPassword) {
-      setErrors("Veuillez remplir tous les champs.");
-      return;
+    const newErrors = {};
+
+    if (!password) {
+      newErrors.password = "Veuillez entrer un nouveau mot de passe.";
+    } else if (!validatePassword(password)) {
+      newErrors.password =
+        "Le mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre.";
     }
 
-    if (password !== confirmPassword) {
-      setErrors("Les mots de passe ne correspondent pas.");
+    if (!confirmPassword) {
+      newErrors.confirmPassword = "Veuillez confirmer votre mot de passe.";
+    } else if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Les mots de passe ne correspondent pas.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
@@ -28,13 +43,15 @@ const ResetPassword = () => {
       .post(`${apiUrl}/reset-password/${token}`, { password })
       .then((response) => {
         setMessage("Votre mot de passe a été réinitialisé avec succès.");
-        setErrors("");
+        setErrors({});
         setTimeout(() => {
-          navigate("/");
-        }, 3000); // Redirection après 3 secondes
+          navigate("/"); // Redirection après succès
+        }, 3000);
       })
       .catch((error) => {
-        setErrors("Erreur lors de la réinitialisation du mot de passe.");
+        setErrors({
+          apiError: "Erreur lors de la réinitialisation du mot de passe.",
+        });
         console.error(error.message);
       });
   };
@@ -51,7 +68,9 @@ const ResetPassword = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            aria-invalid={!!errors.password}
           />
+          {errors.password && <p className="error">{errors.password}</p>}
         </div>
         <div>
           <label htmlFor="confirmPassword">Confirmer le mot de passe</label>
@@ -61,10 +80,18 @@ const ResetPassword = () => {
             id="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            aria-invalid={!!errors.confirmPassword}
           />
+          {errors.confirmPassword && (
+            <p className="error">{errors.confirmPassword}</p>
+          )}
         </div>
-        {errors && <p style={{ color: "red" }}>{errors}</p>}
-        {message && <p style={{ color: "green" }}>{message}</p>}
+        {errors.apiError && <p className="error">{errors.apiError}</p>}
+        {message && (
+          <p aria-live="polite" className="success-message">
+            {message}
+          </p>
+        )}
         <button type="submit">Réinitialiser</button>
       </form>
     </div>

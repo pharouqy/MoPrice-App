@@ -2,6 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /*border: 0.5px solid red;*/
+  font-family: "Playwrite CU", "Courier New", Courier, monospace;
+  font-weight: 500;
+}
+
+h1 {
+  text-align: center;
 }
 
 .contact,
@@ -10,11 +17,14 @@
 .home,
 .errors,
 .profil,
-.forgot-password {
+.forgot-password,
+.reset-password {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #7FA1C3;
+  color: #f5eded;
 }
 
 .contact,
@@ -22,15 +32,93 @@
 .login,
 .register,
 .profil,
-.forgot-password {
+.forgot-password,
+.reset-password {
   flex-direction: column;
 }
 
 p.instruction {
   font-size: 0.6rem;
+  text-wrap: wrap;
 }
 
 p.error {
   color: red;
   font-size: 0.7rem;
+}
+
+form > div > label {
+  width: 100%;
+  display: block;
+}
+
+button:not(nav > ul > li:nth-child(3) > button) {
+  width: 100%;
+  background-color: #6482AD;
+  color: #f5eded;
+  border: unset;
+  padding: 10px;
+  border-radius: 15px;
+  margin: 15px 0 0 0;
+}
+
+textarea {
+  width: 100%;
+  padding: 5px;
+  border-radius: 10px;
+  border: unset;
+  color: #f5eded;
+  background-color: rgb(251, 245, 233);
+}
+
+form > div > input,
+ul > li:nth-child(3) > input[type=password],
+input[type=text],
+input[type=email],
+#year,
+#model {
+  width: 100%;
+  border-radius: 10px;
+  border: unset;
+  padding: 5px;
+  color: #6482AD !important;
+  background-color: rgb(251, 245, 233) !important;
+}
+
+form {
+  padding: 10px;
+}
+
+div > div:nth-child(2) > ul {
+  list-style: none;
+  text-align: center;
+}
+
+nav > ul > li:nth-child(3) > button {
+  background-color: transparent;
+  color: #f5eded;
+  border: unset;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  font-size: 0.9rem;
+}
+
+div > div:nth-child(2) {
+  padding: 10px;
+}
+
+div > aside > h2 {
+  text-align: center;
+}
+
+div > aside > h2 > span {
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+
+#root > div > div > a {
+  color: #f5eded;
 }

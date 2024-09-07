@@ -53,7 +53,7 @@ const ForgotPassword = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+          {errors.email && <p className="error">{errors.email}</p>}
         </div>
         <div>
           <button type="submit">Envoyer</button>
