@@ -77,13 +77,13 @@ const Login = () => {
             Cookies.remove("email");
             Cookies.remove("password");
           }
-
           localStorage.setItem("token", token);
           localStorage.setItem("id", userId);
           navigate("/home");
         })
         .catch((error) => {
-          setStatus(`Erreur lors de l'inscription : ${error.message}`);
+          console.log(error);
+          setStatus(`Erreur lors de l'inscription : ${error.response.data.message}`);
         });
     }
   };

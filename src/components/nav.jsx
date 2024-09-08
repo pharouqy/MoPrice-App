@@ -21,9 +21,6 @@ const Nav = () => {
               <li>
                 <Link to={`/profil/${id}`}>Profil</Link>
               </li>
-              <li>
-                <button onClick={() => logout()}>Logout</button>
-              </li>
             </>
           ) : (
             <>
@@ -38,6 +35,16 @@ const Nav = () => {
           <li>
             <Link to="/contact">Contact</Link>
           </li>
+          {token ? (
+            <>
+              <li>
+                <button onClick={() => logout()}>Logout</button>
+              </li>
+            </>
+          ) : (
+            <>
+            </>
+          )}
         </ul>
       </nav>
     </div>

@@ -22,7 +22,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: auto;
   background-color: #7FA1C3;
   color: #f5eded;
 }
@@ -52,13 +52,20 @@ form > div > label {
   display: block;
 }
 
-button:not(nav > ul > li:nth-child(3) > button) {
+button,
+nav > ul > li:nth-child(4) > button,
+.button {
   width: 100%;
   background-color: #6482AD;
   color: #f5eded;
   border: unset;
   padding: 10px;
   border-radius: 15px;
+  cursor: pointer;
+
+}
+
+button:not(nav > ul > li:nth-child(4) > button) {
   margin: 15px 0 0 0;
 }
 
@@ -76,7 +83,8 @@ ul > li:nth-child(3) > input[type=password],
 input[type=text],
 input[type=email],
 #year,
-#model {
+#model,
+textarea {
   width: 100%;
   border-radius: 10px;
   border: unset;
@@ -121,4 +129,21 @@ div > aside > h2 > span {
 
 #root > div > div > a {
   color: #f5eded;
+}
+
+.selected-device-image {
+  margin-top: 20px;
+  text-align: center;
+}
+.selected-device-image img {
+  width: 150px;
+  height: auto;
+  border: 1px solid #ddd;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+p.presentation, p.contact-form {
+  text-align: center;
+  font-size: 1.5rem;
 }

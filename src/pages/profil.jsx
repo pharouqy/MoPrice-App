@@ -63,7 +63,6 @@ const Profil = () => {
       .then(() => {
         setEditingField(null); // Quitte le mode édition après la sauvegarde
         setStatus(`${field} mis à jour avec succès`);
-
         // Met à jour les valeurs initiales après la sauvegarde
         if (field === "name") {
           setInitialName(completeName);
@@ -122,7 +121,8 @@ const Profil = () => {
   };
 
   return (
-    <div className="profil">
+    <>
+     <div className="profil">
       <h1>Profil</h1>
       <div>
         <ul>
@@ -178,6 +178,7 @@ const Profil = () => {
       </div>
       <p>{status}</p>
     </div>
+    </>
   );
 };
 

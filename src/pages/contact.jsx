@@ -37,42 +37,54 @@ const Contact = () => {
 
     // Check if fields are empty
     if (!formData.name || !formData.email || !formData.message) {
-      setStatus("All fields must be filled.");
+      setStatus("Tous les champs doivent être remplis.");
       return;
     }
 
     // Validate the name
     if (!validateName(formData.name)) {
-      setStatus("Name must contain only letters and be at least 2 characters long.");
+      setStatus(
+        "Le nom doit contenir uniquement des lettres et avoir au moins 2 caractères."
+      );
       return;
     }
 
     // Validate the email
     if (!validateEmail(formData.email)) {
-      setStatus("Please enter a valid email address.");
+      setStatus("Veuillez entrer une adresse email valide.");
       return;
     }
 
-    setStatus("Sending...");
+    setStatus("Envoi en cours...");
     try {
       const response = await axios.post(`${apiUrl}/contact`, formData);
       if (response.status === 200) {
-        setStatus("Message sent successfully!");
+        setStatus("Message envoyé avec succès !");
         setFormData({ name: "", email: "", message: "" }); // Reset the form
       } else {
-        setStatus("Failed to send message.");
+        setStatus("Échec de l'envoi du message.");
       }
     } catch (error) {
-      setStatus(`Error occurred while sending the message: ${error.message}`);
+      setStatus(
+        `Une erreur est survenue lors de l'envoi du message : ${error.message}`
+      );
     }
   };
 
   return (
     <div className="contact">
       <h1>Contact</h1>
+      <p className="contact-form">
+        Si vous rencontrez des bugs ou si vous avez besoin de plus
+        d&apos;informations, n&apos;hésitez pas à m&apos;envoyer un message. Je suis à votre
+        disposition pour répondre à vos questions et vous aider à résoudre tout
+        problème que vous pourriez rencontrer. Votre retour est précieux pour
+        améliorer continuellement l&apos;expérience utilisateur, alors n&apos;hésitez pas
+        à me contacter !
+      </p>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Nom</label>
         </div>
         <div>
           <input
@@ -106,7 +118,7 @@ const Contact = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Envoyer</button>
       </form>
       <p>{status}</p>
     </div>
