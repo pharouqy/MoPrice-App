@@ -6,7 +6,7 @@
   "homepage": "https://pharouqy.github.io/MoPrice-App",
   "scripts": {
     "dev": "vite",
-    "build": "vite dist",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
