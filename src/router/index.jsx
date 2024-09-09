@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import AuthCheck from "../components/authCheck";
 import Home from "../pages/home";
-import Profil from "../pages/profil";
+import User from "../pages/profil";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import Contact from "../pages/contact";
@@ -22,10 +22,10 @@ const AppRouter = () => {
           }
         />
         <Route
-          path="/profil/:id"
+          path="/user/:id"
           element={
             <AuthCheck>
-              <Profil />
+              <User />
             </AuthCheck>
           }
         />

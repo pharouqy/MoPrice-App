@@ -19,7 +19,7 @@ const Nav = () => {
                 <Link to="/home">Home</Link>
               </li>
               <li>
-                <Link to={`/profil/${id}`}>Profil</Link>
+                <Link to={`/user/${id}`}>Profil</Link>
               </li>
             </>
           ) : (

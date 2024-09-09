@@ -4,7 +4,7 @@ import axios from "axios";
 import useLogout from "../hooks/useLogout";
 import Cookies from "js-cookie";
 
-const Profil = () => {
+const User = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const { id } = useParams();
   const logout = useLogout();
@@ -182,4 +182,4 @@ const Profil = () => {
   );
 };
 
-export default Profil;
+export default User;
