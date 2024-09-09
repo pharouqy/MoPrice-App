@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import AuthCheck from "../components/authCheck";
+import ForgotPassword from "../components/ForgotPassword";
+import ResetPassword from "../components/resetPassword";
 import Home from "../pages/home";
 import Profil from "../pages/profil";
 import Login from "../pages/login";
 import Register from "../pages/register";
 import Contact from "../pages/contact";
 import Errors from "../pages/errors";
-import ForgotPassword from "../components/ForgotPassword";
-import ResetPassword from "../components/resetPassword";
 
 const AppRouter = () => {
   return (
