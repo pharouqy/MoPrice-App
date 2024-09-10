@@ -145,5 +145,9 @@ div > aside > h2 > span {
 
 p.presentation, p.contact-form {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: clamp(11px, 3vw, 18px);
+}
+
+li {
+  list-style: none;
 }

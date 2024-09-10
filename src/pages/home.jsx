@@ -2,46 +2,44 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Home = () => {
-  const apiUrlPhone = import.meta.env.VITE_API_URL_PHONE; // URL de l'API pour récupérer les modèles de téléphones
+  const apiUrlPhone = import.meta.env.VITE_API_URL_PHONE;
   const [year, setYear] = useState(null);
   const [price, setPrice] = useState(null);
-  const [models, setModels] = useState({}); // État pour stocker les modèles de téléphones
+  const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState("");
   const [finalPrice, setFinalPrice] = useState(0);
-  const [selectedDeviceImage, setSelectedDeviceImage] = useState(""); // Stocke l'image du téléphone sélectionné
-  const [showFinalPrice, setShowFinalPrice] = useState(false); // Pour afficher le prix final après que l'utilisateur a rempli tous les champs
+  const [selectedDeviceImage, setSelectedDeviceImage] = useState(""); 
+  const [showFinalPrice, setShowFinalPrice] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredModels, setFilteredModels] = useState([]);
   const currentYear = new Date().getFullYear();
-  const depreciatingRate = 0.2; // Taux de dépréciation
+  const depreciatingRate = 0.2;
 
-  // API request to get phone models
   useEffect(() => {
     axios
       .get(apiUrlPhone)
       .then((response) => {
-        setModels(response.data); // Stocke les modèles récupérés depuis l'API
+        setModels(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching phone models", error); // Gère les erreurs lors de la requête
+        console.error("Error fetching phone models", error);
       });
   }, [apiUrlPhone]);
 
-  // Calcul du prix final
   const calculateTheFinalPrice = (price, numbersOfYear, depreciatingRate) => {
     return Math.ceil(price * (1 - depreciatingRate) ** numbersOfYear);
   };
 
-  // Fonction pour calculer le prix seulement quand l'utilisateur appuie sur "Calculate"
   const handleCalculatePrice = () => {
     if (year && price && selectedModel) {
       const numbersOfYear = currentYear - year;
       setFinalPrice(
         calculateTheFinalPrice(price, numbersOfYear, depreciatingRate)
       );
-      setShowFinalPrice(true); // Montre le prix final
+      setShowFinalPrice(true);
     }
   };
 
-  // Génère les options pour les années
   const generateYearOptions = () => {
     const years = [];
     for (let i = 0; i < 10; i++) {
@@ -49,20 +47,25 @@ const Home = () => {
     }
     return years;
   };
-
-  // Fonction appelée lorsque l'utilisateur sélectionne un modèle de téléphone
-  const handleModelChange = (e) => {
-    const selectedDeviceKey = e.target.value;
-    setSelectedModel(selectedDeviceKey);
-
-    // Trouver l'image du téléphone sélectionné
-    models.data.forEach((brand) => {
-      brand.device_list.forEach((device) => {
-        if (device.device_name === selectedDeviceKey) {
-          setSelectedDeviceImage(device.device_image); // Stocke l'image du téléphone sélectionné
-        }
-      });
-    });
+  const handleSearchChange = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    if (term.length >= 3) {
+      const filtered = models.data.flatMap((brand) =>
+        brand.device_list.filter((device) =>
+          device.device_name.toLowerCase().includes(term.toLowerCase())
+        )
+      );
+      setFilteredModels(filtered);
+    } else {
+      setFilteredModels([]);
+    }
+  };
+  const handleModelSelect = (device) => {
+    setSelectedModel(device.device_name);
+    setSearchTerm(device.device_name);
+    setSelectedDeviceImage(device.device_image);
+    setFilteredModels([]);
   };
 
   return (
@@ -70,16 +73,10 @@ const Home = () => {
       <h1>Home</h1>
       <p className="presentation">
         Découvrez notre application révolutionnaire qui évalue la valeur de
-        revente de votre smartphone après des années d&apos;utilisation. Grâce à
-        un algorithme intelligents, elle analyse le prix approximative pour
-        vendre sans se tromper, elle fournis une estimation précise et juste.
-        Que vous cherchiez à vendre ou à acheter, cette application vous guide
-        avec transparence et simplicité, pour vous assurer de faire la meilleure
-        affaire. Ne laissez pas l&apos;incertitude freiner vos transactions,
-        obtenez la vraie valeur de votre téléphone en un clin d&apos;œil !
+        revente de votre smartphone après des années d&apos;utilisation.
       </p>
       <form action="" method="post">
-        {/* Année de vente */}
+        {/* Année d'achat */}
         <div>
           <label htmlFor="year">L&apos;année d&apos;achat du smartphone</label>
         </div>
@@ -100,8 +97,6 @@ const Home = () => {
             ))}
           </select>
         </div>
-
-        {/* Prix de vente */}
         <div>
           <label htmlFor="price">Le Prix d&apos;achat du smartphone neuf</label>
         </div>
@@ -109,47 +104,40 @@ const Home = () => {
           <input
             type="number"
             name="price"
+            placeholder="Prix en dinars algériens"
             id="price"
             onChange={(e) => setPrice(parseFloat(e.target.value))}
           />
         </div>
-
-        {/* Modèle de téléphone */}
         <div>
-          <label htmlFor="model">Le model du télephone</label>
+          <label htmlFor="search">Rechercher un modèle</label>
         </div>
         <div>
-          <select
-            name="model"
-            id="model"
-            onChange={handleModelChange}
-            defaultValue=""
-          >
-            <option value="" disabled>
-              Séléctionner le model
-            </option>
-            {/* Les modèles seront affichés ici si récupérés depuis l'API */}
-            {models.data &&
-              models.data.map((brand) => (
-                <optgroup key={brand.brand_id} label={brand.brand_name}>
-                  {brand.device_list.map((device) => (
-                    <option key={device.device_id} value={device.device_name}>
-                      {device.device_name}
-                    </option>
-                  ))}
-                </optgroup>
-              ))}
-          </select>
+          <input
+            type="text"
+            id="search"
+            placeholder="Minimum 3 caractères"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
         </div>
-
-        {/* Affichage de l'image du téléphone sélectionné */}
+        {filteredModels.length > 0 && (
+          <ul className="suggestions-list">
+            {filteredModels.map((device) => (
+              <li
+                key={device.device_id}
+                onClick={() => handleModelSelect(device)}
+              >
+                {device.device_name}
+              </li>
+            ))}
+          </ul>
+        )}
         {selectedDeviceImage && (
           <div className="selected-device-image">
             <img src={selectedDeviceImage} alt={selectedModel} />
           </div>
         )}
-
-        {/* Bouton pour calculer le prix */}
         <div>
           <button
             type="button"
@@ -160,12 +148,10 @@ const Home = () => {
           </button>
         </div>
       </form>
-
-      {/* Affichage du prix final si tout est rempli */}
       {showFinalPrice && (
         <aside>
           <h2>
-            Le prix final approximative de re-vente en {currentYear} est de:{" "}
+            Le prix final approximatif de revente en {currentYear} est de:{" "}
             <span>{finalPrice}</span> Dinars Algériens
           </h2>
         </aside>
