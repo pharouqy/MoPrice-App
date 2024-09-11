@@ -76,11 +76,7 @@ const Contact = () => {
       <h1>Contact</h1>
       <p className="contact-form">
         Si vous rencontrez des bugs ou si vous avez besoin de plus
-        d&apos;informations, n&apos;hésitez pas à m&apos;envoyer un message. Je suis à votre
-        disposition pour répondre à vos questions et vous aider à résoudre tout
-        problème que vous pourriez rencontrer. Votre retour est précieux pour
-        améliorer continuellement l&apos;expérience utilisateur, alors n&apos;hésitez pas
-        à me contacter !
+        d&apos;informations, n&apos;hésitez pas à m&apos;envoyer un message.
       </p>
       <form onSubmit={handleSubmit}>
         <div>

@@ -22,9 +22,22 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
   background-color: #9AB9DA;
   color: #242424;
+}
+
+.contact,
+.login,
+.register,
+.errors,
+.profil,
+.forgot-password,
+.reset-password {
+  height: 100vh;
+}
+
+.home {
+  height: fit-content;
 }
 
 .contact,
