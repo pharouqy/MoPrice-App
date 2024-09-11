@@ -23,8 +23,8 @@ h1 {
   justify-content: center;
   align-items: center;
   height: auto;
-  background-color: #7FA1C3;
-  color: #f5eded;
+  background-color: #9AB9DA;
+  color: #242424;
 }
 
 .contact,
@@ -56,7 +56,7 @@ button,
 nav > ul > li:nth-child(4) > button,
 .button {
   width: 100%;
-  background-color: #6482AD;
+  background-color: #455b7a;
   color: #f5eded;
   border: unset;
   padding: 10px;
@@ -89,7 +89,7 @@ textarea {
   border-radius: 10px;
   border: unset;
   padding: 5px;
-  color: #6482AD !important;
+  color: #455b7a !important;
   background-color: rgb(251, 245, 233) !important;
 }
 
@@ -128,7 +128,7 @@ div > aside > h2 > span {
 }
 
 #root > div > div > a {
-  color: #f5eded;
+  color: #242424;
 }
 
 .selected-device-image {
