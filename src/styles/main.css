@@ -63,6 +63,7 @@ p.error {
 form > div > label {
   width: 100%;
   display: block;
+  font-size: clamp(13px, 3vw, 18px);
 }
 
 button,
