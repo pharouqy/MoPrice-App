@@ -141,7 +141,7 @@ div > aside > h2 > span {
   font-size: 2.5rem;
 }
 
-#root > div > div > a {
+#root > div > div > a, p > a {
   color: #242424;
 }
 
@@ -164,4 +164,8 @@ p.presentation, p.contact-form {
 
 li {
   list-style: none;
+}
+
+aside > p {
+  text-align: center;
 }

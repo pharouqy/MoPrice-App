@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import MyDocument from "../components/pdfRendering";
 
 const Home = () => {
   const apiUrlPhone = import.meta.env.VITE_API_URL_PHONE;
@@ -200,9 +202,26 @@ const Home = () => {
       {showFinalPrice && (
         <aside>
           <h2>
-            Le prix final approximatif de revente du {selectedModel} en {currentYear} est de:{" "}
-            <span>{finalPrice}</span> Dinars Algériens
+            Le prix final approximatif de revente du {selectedModel} en{" "}
+            {currentYear} est de: <span>{finalPrice}</span> Dinars Algériens
           </h2>
+          <p>
+            <PDFDownloadLink
+              document={
+                <MyDocument
+                  model={selectedModel}
+                  image={selectedDeviceImage}
+                  finalPrice={finalPrice}
+                  year={year}
+                />
+              }
+              fileName="estimation_smartphone.pdf"
+            >
+              {({ loading }) =>
+                loading ? "Téléchargment du document ..." : "Obtenir le résultat en document format PDF"
+              }
+            </PDFDownloadLink>
+          </p>
         </aside>
       )}
     </div>
