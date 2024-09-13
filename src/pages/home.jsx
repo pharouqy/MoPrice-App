@@ -199,7 +199,7 @@ const Home = () => {
       {showFinalPrice && (
         <aside>
           <h2>
-            Le prix final approximatif de revente en {currentYear} est de:{" "}
+            Le prix final approximatif de revente du {selectedModel} en {currentYear} est de:{" "}
             <span>{finalPrice}</span> Dinars Algériens
           </h2>
         </aside>
