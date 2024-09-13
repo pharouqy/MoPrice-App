@@ -133,6 +133,7 @@ const Home = () => {
         </div>
         <div>
           <input
+            step="1000"
             type="number"
             name="price"
             placeholder="Prix en dinars algériens"
