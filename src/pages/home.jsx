@@ -8,12 +8,30 @@ const Home = () => {
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState("");
   const [finalPrice, setFinalPrice] = useState(0);
-  const [selectedDeviceImage, setSelectedDeviceImage] = useState(""); 
+  const [selectedDeviceImage, setSelectedDeviceImage] = useState("");
   const [showFinalPrice, setShowFinalPrice] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredModels, setFilteredModels] = useState([]);
   const currentYear = new Date().getFullYear();
-  const depreciatingRate = 0.2;
+  const depreciatingRate = 0.15;
+  const [condition, setCondition] = useState(3); // Valeur initiale : "Good condition"
+
+  const getConditionLabel = (value) => {
+    switch (value) {
+      case 1:
+        return "Neuf";
+      case 2:
+        return "Comme neuf";
+      case 3:
+        return "Bonne condition";
+      case 4:
+        return "Condition acceptable";
+      case 5:
+        return "Mauvaise condition";
+      default:
+        return "Good condition";
+    }
+  };
 
   useEffect(() => {
     axios
@@ -26,15 +44,28 @@ const Home = () => {
       });
   }, [apiUrlPhone]);
 
-  const calculateTheFinalPrice = (price, numbersOfYear, depreciatingRate) => {
-    return Math.ceil(price * (1 - depreciatingRate) ** numbersOfYear);
+  const calculateTheFinalPrice = (
+    price,
+    numbersOfYear,
+    depreciatingRate,
+    condition
+  ) => {
+    return (
+      Math.ceil(price * (1 - depreciatingRate) ** numbersOfYear) *
+      (1 - condition / 10)
+    ).toFixed(2);
   };
 
   const handleCalculatePrice = () => {
     if (year && price && selectedModel) {
       const numbersOfYear = currentYear - year;
       setFinalPrice(
-        calculateTheFinalPrice(price, numbersOfYear, depreciatingRate)
+        calculateTheFinalPrice(
+          price,
+          numbersOfYear,
+          depreciatingRate,
+          condition
+        )
       );
       setShowFinalPrice(true);
     }
@@ -109,6 +140,23 @@ const Home = () => {
             onChange={(e) => setPrice(parseFloat(e.target.value))}
           />
         </div>
+        <div>
+          <label htmlFor="conditionRange">Condition du smartphone :</label>
+        </div>
+        <div>
+          <input
+            type="range"
+            id="conditionRange"
+            name="condition"
+            min="1"
+            max="5"
+            step="1"
+            value={condition}
+            onChange={(e) => setCondition(parseInt(e.target.value))}
+          />
+          <span>{getConditionLabel(condition)}</span>
+        </div>
+
         <div>
           <label htmlFor="search">Rechercher un modèle</label>
         </div>
