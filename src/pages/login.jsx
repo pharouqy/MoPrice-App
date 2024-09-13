@@ -70,8 +70,14 @@ const Login = () => {
 
           // Si "Se souvenir de moi" est coché, sauvegarder les informations dans les cookies
           if (rememberMe) {
-            Cookies.set("email", sanitizedEmail, { expires: 7 });
-            Cookies.set("password", sanitizedPassword, { expires: 7 });
+            Cookies.set("email", sanitizedEmail, {
+              expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+              httpOnly: true,
+            });
+            Cookies.set("password", sanitizedPassword, {
+              expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+              httpOnly: true,
+            });
           } else {
             // Si l'utilisateur ne veut pas se souvenir, supprimer les cookies existants
             Cookies.remove("email");
@@ -83,7 +89,9 @@ const Login = () => {
         })
         .catch((error) => {
           console.log(error);
-          setStatus(`Erreur lors de l'inscription : ${error.response.data.message}`);
+          setStatus(
+            `Erreur lors de l'inscription : ${error.response.data.message}`
+          );
         });
     }
   };

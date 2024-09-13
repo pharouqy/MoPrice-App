@@ -11,6 +11,8 @@ const Home = () => {
   const [selectedModel, setSelectedModel] = useState("");
   const [finalPrice, setFinalPrice] = useState(0);
   const [selectedDeviceImage, setSelectedDeviceImage] = useState("");
+  const [selectedDeviceImageForPDF, setSelectedDeviceImageForPDF] =
+    useState("");
   const [showFinalPrice, setShowFinalPrice] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredModels, setFilteredModels] = useState([]);
@@ -98,6 +100,22 @@ const Home = () => {
     setSelectedModel(device.device_name);
     setSearchTerm(device.device_name);
     setSelectedDeviceImage(device.device_image);
+    axios
+      .get(`https://cors-anywhere.herokuapp.com/${device.device_image}`, {
+        responseType: "blob",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        const url = URL.createObjectURL(response.data);
+        setSelectedDeviceImage(url);
+      })
+      .catch((error) => {
+        console.error("Error fetching device image", error);
+      });
+
     setFilteredModels([]);
   };
 
@@ -210,7 +228,7 @@ const Home = () => {
               document={
                 <MyDocument
                   model={selectedModel}
-                  image={selectedDeviceImage}
+                  image={selectedDeviceImageForPDF}
                   finalPrice={finalPrice}
                   year={year}
                 />
@@ -218,7 +236,9 @@ const Home = () => {
               fileName="estimation_smartphone.pdf"
             >
               {({ loading }) =>
-                loading ? "Téléchargment du document ..." : "Obtenir le résultat en document format PDF"
+                loading
+                  ? "Téléchargment du document ..."
+                  : "Obtenir le résultat en document format PDF"
               }
             </PDFDownloadLink>
           </p>
