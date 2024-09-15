@@ -16,19 +16,19 @@ const Nav = () => {
           {token ? (
             <>
               <li>
-                <Link to="/home">Home</Link>
+                <Link to="/home">Accueil</Link>
               </li>
               <li>
-                <Link to={`/user/${id}`}>Profil</Link>
+                <Link to={`/user/${id}`}>Profile</Link>
               </li>
             </>
           ) : (
             <>
               <li>
-                <Link to="/register">Register</Link>
+                <Link to="/register">Inscription</Link>
               </li>
               <li>
-                <Link to="/">Login</Link>
+                <Link to="/">Connexion</Link>
               </li>
             </>
           )}
@@ -38,7 +38,7 @@ const Nav = () => {
           {token ? (
             <>
               <li>
-                <button onClick={() => logout()}>Logout</button>
+                <button onClick={() => logout()}>Déconnexion</button>
               </li>
             </>
           ) : (

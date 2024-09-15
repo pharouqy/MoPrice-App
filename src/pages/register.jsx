@@ -100,7 +100,7 @@ const Register = () => {
 
   return (
     <div className="register">
-      <h1>Register</h1>
+      <h1>Inscription</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email</label>
