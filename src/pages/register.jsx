@@ -114,7 +114,7 @@ const Register = () => {
           {errors.email && <p className="error">{errors.email}</p>}
         </div>
         <div>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Nom</label>
           <input
             type="text"
             name="name"
@@ -125,7 +125,7 @@ const Register = () => {
           {errors.name && <p className="error">{errors.name}</p>}
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Mot de passe</label>
           <input
             type="password"
             name="password"
@@ -140,7 +140,7 @@ const Register = () => {
           {errors.password && <p className="error">{errors.password}</p>}
         </div>
         <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirmer le mot de passe</label>
           <input
             type="password"
             name="confirmPassword"
@@ -153,7 +153,7 @@ const Register = () => {
           )}
         </div>
         <div>
-          <button type="submit">Register</button>
+          <button type="submit">Inscription</button>
         </div>
       </form>
       <p>{status}</p>

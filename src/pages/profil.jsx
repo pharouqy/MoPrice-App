@@ -127,7 +127,7 @@ const User = () => {
       <div>
         <ul>
           <li>
-            Name:
+            <label htmlFor="">Votre nom :</label>
             {editingField === "name" ? (
               <input
                 type="text"
@@ -146,7 +146,7 @@ const User = () => {
             )}
           </li>
           <li>
-            Email:
+            <label htmlFor="">Votre Email :</label>:
             {editingField === "email" ? (
               <input
                 type="email"
@@ -163,18 +163,18 @@ const User = () => {
             )}
           </li>
           <li>
-            Password:
+            <label htmlFor="">Mot de passe :</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button onClick={handlePasswordChange}>Changer mot de passe</button>
+            <button onClick={handlePasswordChange}>Changer le mot de passe</button>
           </li>
         </ul>
       </div>
       <div>
-        <button onClick={handleDelete}>Supprimer</button>
+        <button onClick={handleDelete} title="Cette action est iréversible !">Supprimer votre profil</button>
       </div>
       <p>{status}</p>
     </div>

@@ -80,7 +80,7 @@ const Contact = () => {
       </p>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Nom</label>
+          <label htmlFor="name">Votre nom</label>
         </div>
         <div>
           <input
@@ -92,7 +92,7 @@ const Contact = () => {
           />
         </div>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Votre email</label>
         </div>
         <div>
           <input
@@ -104,7 +104,7 @@ const Contact = () => {
           />
         </div>
         <div>
-          <label htmlFor="message">Message</label>
+          <label htmlFor="message">Votre message</label>
         </div>
         <div>
           <textarea
@@ -114,7 +114,7 @@ const Contact = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Envoyer</button>
+        <button type="submit">Envoyer le message</button>
       </form>
       <p>{status}</p>
     </div>

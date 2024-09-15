@@ -11,8 +11,7 @@ const Home = () => {
   const [selectedModel, setSelectedModel] = useState("");
   const [finalPrice, setFinalPrice] = useState(0);
   const [selectedDeviceImage, setSelectedDeviceImage] = useState("");
-  const [selectedDeviceImageForPDF, setSelectedDeviceImageForPDF] =
-    useState("");
+  const [selectedDeviceImageForPDF, setSelectedDeviceImageForPDF] = useState("");
   const [showFinalPrice, setShowFinalPrice] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredModels, setFilteredModels] = useState([]);
@@ -104,7 +103,9 @@ const Home = () => {
       .get(`https://cors-anywhere.herokuapp.com/${device.device_image}`, {
         responseType: "blob",
         headers: {
+          Origin: "https://cors-anywhere.herokuapp.com/",
           "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
         },
         withCredentials: true,
       })
@@ -213,7 +214,7 @@ const Home = () => {
             onClick={handleCalculatePrice}
             className="button"
           >
-            Calculer
+            Calculer le prix
           </button>
         </div>
       </form>

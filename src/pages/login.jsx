@@ -98,7 +98,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <h1>Login</h1>
+      <h1>Connexion</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email</label>
@@ -114,7 +114,7 @@ const Login = () => {
           {errors.email && <p className="error">{errors.email}</p>}
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Mot de passe</label>
         </div>
         <div>
           <input
@@ -137,7 +137,7 @@ const Login = () => {
           </label>
         </div>
         <div>
-          <button type="submit">Login</button>
+          <button type="submit">Connexion</button>
         </div>
       </form>
       <div>
