@@ -28,7 +28,11 @@ const ForgotPassword = () => {
       const sanitizedEmail = email.replace(/[<>]/g, "");
 
       axios
-        .post(`${apiUrl}/forgot-password`, { email: sanitizedEmail }, { headers: { "Content-Type": "application/json" } })
+        .post(
+          `${apiUrl}/forgot-password`,
+          { email: sanitizedEmail },
+          { headers: { "Content-Type": "application/json" } }
+        )
         .then((response) => {
           setMessage("Un email de réinitialisation a été envoyé.");
         })

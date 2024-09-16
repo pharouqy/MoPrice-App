@@ -5,6 +5,7 @@ const Nav = () => {
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const logout = useLogout();
+  
 
   return (
     <div className="menu">
