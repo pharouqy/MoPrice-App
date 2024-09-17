@@ -11,7 +11,10 @@
     {
       "src": "./(.*)",
       "dest": "./index.html"
+    },
+    {
+      "src": "/reset-password/:token",
+      "dest": "/index.js"
     }
   ]
 }
-

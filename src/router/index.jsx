@@ -6,8 +6,8 @@ import Login from "../pages/login";
 import Register from "../pages/register";
 import Contact from "../pages/contact";
 import Errors from "../pages/errors";
-import ForgotPassword from "../components/forgotPassword";
-import ResetPassword from "../components/resetPassword";
+import ForgotPassword from "../pages/forgotPassword";
+import ResetPassword from "../pages/resetPassword";
 
 const AppRouter = () => {
   return (
