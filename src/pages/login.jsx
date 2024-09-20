@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 const Login = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -14,12 +13,10 @@ const Login = () => {
 
   // Récupérer les informations des cookies lors du chargement du composant
   useEffect(() => {
-    const savedEmail = Cookies.get("email");
-    const savedPassword = Cookies.get("password");
+    const savedEmail = localStorage.getItem("email");
 
-    if (savedEmail && savedPassword) {
+    if (savedEmail) {
       setEmail(savedEmail);
-      setPassword(savedPassword);
       setRememberMe(true); // Coche la case automatiquement si les informations sont récupérées
     }
   }, []); // Le tableau vide [] garantit que cet effet est exécuté une seule fois, au montage du composant
@@ -68,20 +65,10 @@ const Login = () => {
           setStatus("Connexion réussie !");
           const { userId, token } = response.data;
 
-          // Si "Se souvenir de moi" est coché, sauvegarder les informations dans les cookies
           if (rememberMe) {
-            Cookies.set("email", sanitizedEmail, {
-              expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-              httpOnly: true,
-            });
-            Cookies.set("password", sanitizedPassword, {
-              expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-              httpOnly: true,
-            });
+            localStorage.setItem("email", email);
           } else {
-            // Si l'utilisateur ne veut pas se souvenir, supprimer les cookies existants
-            Cookies.remove("email");
-            Cookies.remove("password");
+            localStorage.remove("email");
           }
           localStorage.setItem("token", token);
           localStorage.setItem("id", userId);

@@ -146,7 +146,7 @@ const User = () => {
             )}
           </li>
           <li>
-            <label htmlFor="">Votre Email :</label>:
+            <label htmlFor="">Votre Email :</label>
             {editingField === "email" ? (
               <input
                 type="email"
