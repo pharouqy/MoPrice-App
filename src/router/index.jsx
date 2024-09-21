@@ -9,44 +9,36 @@ import Errors from "../pages/errors";
 import ForgotPassword from "../pages/forgotPassword";
 import ResetPassword from "../pages/resetPassword";
 
-const isAuthenticated = localStorage.getItem("token");
-
 const AppRouter = () => {
   return (
     <>
-      {isAuthenticated ? (
-        <Routes>
-          <Route
-            path="/home"
-            element={
-              <AuthCheck>
-                <Home />
-              </AuthCheck>
-            }
-          />
-          <Route
-            path="/user/:id"
-            element={
-              <AuthCheck>
-                <User />
-              </AuthCheck>
-            }
-          />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Errors />} />
-        </Routes>
-      ) : (
-        <>
-          <Route path="/" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Errors />} />
-        </>
-      )}
+      <Routes>
+        <Route
+          path="/home"
+          element={
+            <AuthCheck>
+              <Home />
+            </AuthCheck>
+          }
+        />
+        <Route
+          path="/user/:id"
+          element={
+            <AuthCheck>
+              <User />
+            </AuthCheck>
+          }
+        />
+        <Route path="/" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Errors />} />
+      </Routes>
     </>
   );
 };
 
 export default AppRouter;
+
