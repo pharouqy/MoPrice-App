@@ -19,7 +19,6 @@ VITE_API_URL=http://localhost:3000/auth
 Le projet utilise les dépendances suivantes :
 
 - `axios`: ^1.7.7
-- `js-cookie`: ^3.0.5
 - `react`: ^18.3.1
 - `react-dom`: ^18.3.1
 - `react-router-dom`: ^6.26.1

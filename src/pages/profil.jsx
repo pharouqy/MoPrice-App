@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import useLogout from "../hooks/useLogout";
-import Cookies from "js-cookie";
 
 const User = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -109,8 +108,7 @@ const User = () => {
         },
       })
       .then(() => {
-        Cookies.remove("email");
-        Cookies.remove("password");
+        localStorage.removeItem("email");
 
         setStatus("Profil supprimé avec succès");
         logout();
