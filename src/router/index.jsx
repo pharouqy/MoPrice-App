@@ -16,7 +16,7 @@ const isAuthenticated = () => {
 const AppRouter = () => {
   return (
     <>
-      {isAuthenticated ? (
+      {isAuthenticated() ? (
         <Routes>
           <Route
             path="/home"
