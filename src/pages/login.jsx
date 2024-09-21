@@ -68,7 +68,7 @@ const Login = () => {
           if (rememberMe) {
             localStorage.setItem("email", email);
           } else {
-            localStorage.remove("email");
+            localStorage.removeItem("email");
           }
           localStorage.setItem("token", token);
           localStorage.setItem("id", userId);
