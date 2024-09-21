@@ -9,14 +9,12 @@ import Errors from "../pages/errors";
 import ForgotPassword from "../pages/forgotPassword";
 import ResetPassword from "../pages/resetPassword";
 
-const isAuthenticated = () => {
-  return !!localStorage.getItem("token");
-};
+const isAuthenticated = localStorage.getItem("token");
 
 const AppRouter = () => {
   return (
     <>
-      {isAuthenticated() ? (
+      {isAuthenticated ? (
         <Routes>
           <Route
             path="/home"
