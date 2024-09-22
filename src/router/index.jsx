@@ -10,7 +10,7 @@ import ForgotPassword from "../pages/forgotPassword";
 import ResetPassword from "../pages/resetPassword";
 
 const AppRouter = () => {
-  const token = Boolean(localStorage.getItem("token"));
+  const token = !!localStorage.getItem("token");
   return (
     <>
       <Routes>
