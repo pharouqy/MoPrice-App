@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AuthCheck from "../components/authCheck";
 import Home from "../pages/home";
 import User from "../pages/profil";
@@ -10,6 +10,7 @@ import ForgotPassword from "../pages/forgotPassword";
 import ResetPassword from "../pages/resetPassword";
 
 const AppRouter = () => {
+  const token = Boolean(localStorage.getItem("token"));
   return (
     <>
       <Routes>
@@ -29,10 +30,13 @@ const AppRouter = () => {
             </AuthCheck>
           }
         />
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={token ? <Navigate to="/home" /> : <Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/register"
+          element={token ? <Navigate to="/home" /> : <Register />}
+        />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Errors />} />
       </Routes>
@@ -41,4 +45,3 @@ const AppRouter = () => {
 };
 
 export default AppRouter;
-

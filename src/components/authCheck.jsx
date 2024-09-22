@@ -11,7 +11,7 @@ const AuthCheck = ({ children }) => {
   }
 
   // Rendre les enfants si le token est présent
-  return children;
+  return token ? children : null;
 };
 
 AuthCheck.propTypes = {
