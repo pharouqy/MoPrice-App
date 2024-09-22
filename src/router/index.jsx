@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AuthCheck from "../components/authCheck";
 import Home from "../pages/home";
 import User from "../pages/profil";
@@ -30,13 +30,10 @@ const AppRouter = () => {
             </AuthCheck>
           }
         />
-        <Route path="/" element={token ? <Navigate to="/home" /> : <Login />} />
+        <Route path="/" element={token ? <Home /> : <Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route
-          path="/register"
-          element={token ? <Navigate to="/home" /> : <Register />}
-        />
+        <Route path="/register" element={token ? <Home /> : <Register />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Errors />} />
       </Routes>
