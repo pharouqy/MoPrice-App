@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthCheck from "../components/authCheck";
 import Home from "../pages/home";
@@ -10,7 +11,10 @@ import ForgotPassword from "../pages/forgotPassword";
 import ResetPassword from "../pages/resetPassword";
 
 const AppRouter = () => {
-  const token = !!localStorage.getItem("token");
+  const [token, setToken] = useState(false);
+  useEffect(() => {
+    return setToken(!!localStorage.getItem("token"));
+  }, [token]);
   return (
     <>
       <Routes>
