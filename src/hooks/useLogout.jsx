@@ -5,7 +5,7 @@ const useLogout = () => {
   const apiUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
-  const logout = () => {
+  const logout = async () => {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -13,31 +13,30 @@ const useLogout = () => {
       return;
     }
 
+    // Suppression des informations locales
     localStorage.removeItem("token");
     localStorage.removeItem("id");
 
-    axios
-      .get(
+    try {
+      await axios.get(
         `${apiUrl}/logout`,
         {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        },
-        {
           withCredentials: true,
         }
-      )
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(`Erreur lors de la déconnexion : ${error.message}`);
-      });
+      );
+      // Redirection après la déconnexion réussie
+      navigate("/");
+    } catch (error) {
+      console.log(`Erreur lors de la déconnexion : ${error.message}`);
+    }
   };
 
   return logout;
 };
 
 export default useLogout;
+
