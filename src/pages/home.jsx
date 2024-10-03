@@ -11,7 +11,8 @@ const Home = () => {
   const [selectedModel, setSelectedModel] = useState("");
   const [finalPrice, setFinalPrice] = useState(0);
   const [selectedDeviceImage, setSelectedDeviceImage] = useState("");
-  const [selectedDeviceImageForPDF, setSelectedDeviceImageForPDF] = useState("");
+  const [selectedDeviceImageForPDF, setSelectedDeviceImageForPDF] =
+    useState("");
   const [showFinalPrice, setShowFinalPrice] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredModels, setFilteredModels] = useState([]);
@@ -45,7 +46,7 @@ const Home = () => {
       .catch((error) => {
         console.error("Error fetching phone models", error);
       });
-  }, [apiUrlPhone]);
+  }, [models, setModels, condition, apiUrlPhone]);
 
   const calculateTheFinalPrice = (
     price,
@@ -60,7 +61,7 @@ const Home = () => {
   };
 
   const handleCalculatePrice = () => {
-    if (year && price && selectedModel) {
+    if (year && price) {
       const numbersOfYear = currentYear - year;
       setFinalPrice(
         calculateTheFinalPrice(
@@ -81,6 +82,7 @@ const Home = () => {
     }
     return years;
   };
+
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
@@ -95,6 +97,7 @@ const Home = () => {
       setFilteredModels([]);
     }
   };
+
   const handleModelSelect = (device) => {
     setSelectedModel(device.device_name);
     setSearchTerm(device.device_name);
