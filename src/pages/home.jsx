@@ -83,18 +83,18 @@ const Home = () => {
     return years;
   };
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = async (e) => {
     const term = e.target.value;
     setSearchTerm(term);
     if (term.length >= 3) {
-      const filtered = models.data.flatMap((brand) =>
-        brand.device_list.filter((device) =>
+      const filtered = await models.data.flatMap(brand =>
+        brand.device_list.filter(device =>
           device.device_name.toLowerCase().includes(term.toLowerCase())
         )
       );
-      setFilteredModels(filtered);
+       setFilteredModels(filtered);
     } else {
-      setFilteredModels([]);
+       setFilteredModels([]);
     }
   };
 
